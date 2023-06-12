@@ -143,9 +143,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
-
-
-
                                     if (homeControllor
                                             .DataList[index].isButton ==
                                         true) {
@@ -153,6 +150,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           "You Have Already Click One Time",
                                           "message");
                                     } else {
+
+                                      print(index);
                                       HomeModel homeModel = HomeModel(
                                         key: homeControllor.DataList[index].key,
                                         image: homeControllor
@@ -170,10 +169,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                         stoke: homeControllor
                                             .DataList[index].stoke,
                                       );
-
-                                      homeControllor.DataList[index].isButton = true;
-                                      Get.toNamed('/show',
-                                          arguments: homeModel);
+                                      homeControllor.DataList[index].isButton =
+                                          true;
+                                      Get.toNamed(
+                                        '/show',
+                                        arguments: homeModel,
+                                      );
                                     }
                                   },
                                   child: Container(

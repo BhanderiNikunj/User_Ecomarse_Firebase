@@ -1,6 +1,7 @@
 import 'package:ecomarse_firebase/Screen/Bottom/View/BottomScreen.dart';
 import 'package:ecomarse_firebase/Screen/Cart/View/CartScreen.dart';
 import 'package:ecomarse_firebase/Screen/Home/View/HomeScreen.dart';
+import 'package:ecomarse_firebase/Screen/Profile/View/ProfileScreen.dart';
 import 'package:ecomarse_firebase/Screen/ShowProduct/View/ShowProductScreen.dart';
 import 'package:ecomarse_firebase/Screen/SignIn/View/SignInScreen.dart';
 import 'package:ecomarse_firebase/Screen/SignUp/View/SignUpScreen.dart';
@@ -45,6 +46,10 @@ Future<void> main() async {
           GetPage(
             name: '/cart',
             page: () => CartScreen(),
+          ),
+          GetPage(
+            name: '/profile',
+            page: () => ProfileScreen(),
           ),
         ],
       ),

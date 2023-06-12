@@ -46,9 +46,9 @@ class FirebaseHelper {
 
   bool checkLogin() {
     User? user = firebaseAuth.currentUser;
-
+    var uid = user?.uid;
     // ignore: unnecessary_null_comparison
-    if (user!.uid == null) {
+    if (uid == null) {
       return false;
     } else {
       return true;
@@ -59,6 +59,10 @@ class FirebaseHelper {
     User? user = firebaseAuth.currentUser;
     var uid = user!.uid;
     return uid;
+  }
+
+  void signOut() {
+    firebaseAuth.signOut();
   }
 
   // database
@@ -122,5 +126,17 @@ class FirebaseHelper {
           .collection("cart")
           .doc("$key")
           .delete();
+  }
+
+  // profile
+
+  Future<void> insertUserDetail() async {
+    await firebaseFirestore
+        .collection("cart")
+        .doc(FindUid())
+        .collection("detail")
+        .add(
+      {},
+    );
   }
 }

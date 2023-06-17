@@ -129,7 +129,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                mainAxisExtent: 200.sp,
+                                mainAxisExtent: 220.sp,
                               ),
                               itemCount: adminHomeControllor.dataList.length,
                               itemBuilder: (context, index) {
@@ -154,10 +154,28 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            "⭐️ ${adminHomeControllor.dataList[index].rate}",
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "⭐️ ${adminHomeControllor.dataList[index].rate}",
+                                              ),
+                                              IconButton(
+                                                onPressed: () {
+                                                  adminHomeControllor
+                                                      .deleteProduct(
+                                                    key: adminHomeControllor
+                                                        .dataList[index].key,
+                                                  );
+                                                },
+                                                icon: Icon(
+                                                  Icons.delete,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(height: 10.sp),
+                                          SizedBox(height: 5.sp),
                                           Container(
                                             height: 80.sp,
                                             width: double.infinity,

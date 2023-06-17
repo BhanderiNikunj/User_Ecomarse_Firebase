@@ -211,7 +211,53 @@ class _AddDataScreenState extends State<AddDataScreen> {
                   ),
                   SizedBox(height: 20.sp),
                   InkWell(
-                    onTap: () {},
+                    onTap: () async {
+                      if (a1.status == 1) {
+                        print("update");
+                        AdminHomeModel adminModel = AdminHomeModel(
+                          image: addDataControllor.ipath.value,
+                          price: int.parse(addDataControllor.txtPrice.text),
+                          rate: double.parse(addDataControllor.txtRate.text),
+                          name: addDataControllor.txtName.text,
+                          brand: addDataControllor.txtBrande.text,
+                          desc: addDataControllor.txtDesc.text,
+                          stoke: int.parse(addDataControllor.txtStoke.text),
+                          key: a1.key,
+                        );
+                        String msg = await addDataControllor.updateProduct(
+                          a1: adminModel,
+                        );
+
+                        Get.snackbar(
+                          "$msg",
+                          "",
+                        );
+                        Get.back();
+                      } else {
+                        print("insert");
+                        AdminHomeModel adminModel = AdminHomeModel(
+                          image: addDataControllor.ipath.value,
+                          price: int.parse(addDataControllor.txtPrice.text),
+                          rate: double.parse(addDataControllor.txtRate.text),
+                          name: addDataControllor.txtName.text,
+                          brand: addDataControllor.txtBrande.text,
+                          desc: addDataControllor.txtDesc.text,
+                          stoke: int.parse(addDataControllor.txtStoke.text),
+                        );
+                        String msg = await addDataControllor.insertProduct(
+                          a1: adminModel,
+                        );
+
+                        Get.snackbar(
+                          "$msg",
+                          "",
+                        );
+
+                        if (msg == "success") {
+                          Get.back();
+                        }
+                      }
+                    },
                     child: Container(
                       width: 60.sp,
                       height: 30.sp,
@@ -227,7 +273,6 @@ class _AddDataScreenState extends State<AddDataScreen> {
                         color: Colors.pink,
                       ),
                       child: Text(
-                        // h1.status == 1 ? "Update" : "Submit",
                         a1.status == 1 ? "Update" : "Submit",
                         style: TextStyle(
                           color: Colors.white,

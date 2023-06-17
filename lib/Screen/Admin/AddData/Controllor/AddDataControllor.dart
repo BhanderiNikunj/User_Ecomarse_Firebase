@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:ecomarse_firebase/Screen/User/Home/Model/HomeModel.dart';
+import 'package:ecomarse_firebase/Screen/Admin/AdminHome/Model/AdminHomeModel.dart';
 import 'package:ecomarse_firebase/Utiles/FireBaseHelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -13,30 +13,18 @@ class AddDataControllor extends GetxController {
   TextEditingController txtStoke = TextEditingController();
 
   Future<String> insertProduct({
-    required name,
-    required price,
-    required desc,
-    required rate,
-    required stoke,
-    required brand,
-    required image,
+    required AdminHomeModel a1,
   }) async {
     return await FirebaseHelper.firebaseHelper.insertProduct(
-      name: name,
-      image: image,
-      desc: desc,
-      price: price,
-      rate: rate,
-      brand: brand,
-      stoke: stoke,
+      a1: a1,
     );
   }
 
   Future<String> updateProduct({
-    required HomeModel h1,
+    required AdminHomeModel a1,
   }) async {
     return await FirebaseHelper.firebaseHelper.updateProduct(
-      h1: h1,
+      a1: a1,
     );
   }
 

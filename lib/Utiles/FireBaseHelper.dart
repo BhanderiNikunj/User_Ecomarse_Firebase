@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecomarse_firebase/Screen/Admin/AdminHome/Model/AdminHomeModel.dart';
 import 'package:ecomarse_firebase/Screen/Login/AddUserDetail/Model/AddUserModel.dart';
 import 'package:ecomarse_firebase/Screen/User/Home/Model/HomeModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -74,26 +75,20 @@ class FirebaseHelper {
     firebaseAuth.signOut();
   }
 
-  // database
+  // Product
 
   Future<String> insertProduct({
-    required name,
-    required price,
-    required desc,
-    required rate,
-    required stoke,
-    required brand,
-    required image,
+    required AdminHomeModel a1,
   }) async {
     return await firebaseFirestore.collection("product").add(
       {
-        "name": name,
-        "price": price,
-        "desc": desc,
-        "rate": rate,
-        "stoke": stoke,
-        "brand": brand,
-        "image": image,
+        "name": a1.name,
+        "price": a1.price,
+        "desc": a1.desc,
+        "rate": a1.rate,
+        "stoke": a1.stoke,
+        "brand": a1.brand,
+        "image": a1.image,
       },
     ).then((value) {
       return "success";
@@ -103,17 +98,18 @@ class FirebaseHelper {
   }
 
   Future<String> updateProduct({
-    required HomeModel h1,
+    required AdminHomeModel a1,
   }) async {
-    return await firebaseFirestore.collection("product").doc(h1.key).set(
+    print(a1.key);
+    return await firebaseFirestore.collection("product").doc(a1.key).set(
       {
-        "name": h1.name,
-        "price": h1.price,
-        "desc": h1.desc,
-        "rate": h1.rate,
-        "stoke": h1.stoke,
-        "brand": h1.brand,
-        "image": h1.image,
+        "name": a1.name,
+        "price": a1.price,
+        "desc": a1.desc,
+        "rate": a1.rate,
+        "stoke": a1.stoke,
+        "brand": a1.brand,
+        "image": a1.image,
       },
     ).then((value) {
       return "success";
@@ -124,6 +120,12 @@ class FirebaseHelper {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> readProduct() {
     return firebaseFirestore.collection("product").snapshots();
+  }
+
+  Future<void> deleteProduct({
+    required key,
+  }) async {
+    await firebaseFirestore.collection("product").doc(key).delete();
   }
 
   // Add to Cart

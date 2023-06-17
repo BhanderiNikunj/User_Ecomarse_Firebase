@@ -56,7 +56,11 @@ class _SplesScreenState extends State<SplesScreen> {
                 ),
               );
             }
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: FlutterLogo(
+                size: 100.sp,
+              ),
+            );
           },
           stream: FirebaseHelper.firebaseHelper.readUserDetail(),
         ),

@@ -1,13 +1,13 @@
-import 'package:ecomarse_firebase/Screen/AddUserDetail/View/AddUserDetailScreen.dart';
-import 'package:ecomarse_firebase/Screen/Bottom/View/BottomScreen.dart';
-import 'package:ecomarse_firebase/Screen/Cart/View/CartScreen.dart';
-import 'package:ecomarse_firebase/Screen/Home/View/HomeScreen.dart';
-import 'package:ecomarse_firebase/Screen/Profile/View/ProfileScreen.dart';
-import 'package:ecomarse_firebase/Screen/ShowProduct/View/ShowProductScreen.dart';
-import 'package:ecomarse_firebase/Screen/SignIn/View/SignInScreen.dart';
-import 'package:ecomarse_firebase/Screen/SignUp/View/SignUpScreen.dart';
-import 'package:ecomarse_firebase/Screen/Sples/View/SplesScreen.dart';
-import 'package:ecomarse_firebase/Screen/UpdateProfile/View/UpdateProfileScreen.dart';
+import 'package:ecomarse_firebase/Screen/Admin/AddData/View/AddDataScreen.dart';
+import 'package:ecomarse_firebase/Screen/Admin/AdminHome/View/AdminHomeScreen.dart';
+import 'package:ecomarse_firebase/Screen/Login/AddUserDetail/View/AddUserDetailScreen.dart';
+import 'package:ecomarse_firebase/Screen/Login/SignIn/View/SignInScreen.dart';
+import 'package:ecomarse_firebase/Screen/Login/SignUp/View/SignUpScreen.dart';
+import 'package:ecomarse_firebase/Screen/Login/Sples/View/SplesScreen.dart';
+import 'package:ecomarse_firebase/Screen/User/Bottom/View/BottomScreen.dart';
+import 'package:ecomarse_firebase/Screen/User/Cart/View/CartScreen.dart';
+import 'package:ecomarse_firebase/Screen/User/Home/View/HomeScreen.dart';
+import 'package:ecomarse_firebase/Screen/User/ShowProduct/View/ShowProductScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,12 +50,12 @@ Future<void> main() async {
             page: () => CartScreen(),
           ),
           GetPage(
-            name: '/profile',
-            page: () => ProfileScreen(),
+            name: '/adminHome',
+            page: () => AdminHomeScreen(),
           ),
           GetPage(
-            name: '/updateProfile',
-            page: () => UpdateProfileScreen(),
+            name: '/addData',
+            page: () => AddDataScreen(),
           ),
           GetPage(
             name: '/addUserDetail',

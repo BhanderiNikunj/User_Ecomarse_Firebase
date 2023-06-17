@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecomarse_firebase/Screen/Home/Model/HomeModel.dart';
-import 'package:ecomarse_firebase/Screen/UpdateProfile/Modle/UpdateModel.dart';
+import 'package:ecomarse_firebase/Screen/Login/AddUserDetail/Model/AddUserModel.dart';
+import 'package:ecomarse_firebase/Screen/User/Home/Model/HomeModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -64,6 +64,12 @@ class FirebaseHelper {
     return uid;
   }
 
+  Future<String> findFCMToken() async {
+    var fcmToken = await firebaseMessaging.getToken();
+
+    return fcmToken!;
+  }
+
   void signOut() {
     firebaseAuth.signOut();
   }
@@ -125,7 +131,7 @@ class FirebaseHelper {
   void insertCart({
     required HomeModel h1,
   }) {
-    firebaseFirestore.collection("cart").doc(FindUid()).collection("cart").add(
+    firebaseFirestore.collection("data").doc(FindUid()).collection("cart").add(
       {
         "name": h1.name,
         "price": h1.price,
@@ -140,7 +146,7 @@ class FirebaseHelper {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> readCart() {
     return firebaseFirestore
-        .collection("cart")
+        .collection("data")
         .doc(FindUid())
         .collection("cart")
         .snapshots();
@@ -148,7 +154,7 @@ class FirebaseHelper {
 
   void deleteData({required key}) {
     firebaseFirestore
-      ..collection("cart")
+      ..collection("data")
           .doc(FindUid())
           .collection("cart")
           .doc("$key")
@@ -157,67 +163,35 @@ class FirebaseHelper {
 
   // profile
 
-  Future<String> insertProfileData({
-    required UpdateModel u1,
+  Future<String> insertUserDetail({
+    required AddUserModel a1,
   }) async {
-    print(findFcmKey());
     return await firebaseFirestore
-        .collection("cart")
+        .collection("data")
         .doc(FindUid())
-        .collection("detail")
+        .collection("profile")
         .add(
-      {
-        "name": u1.name,
-        "surname": u1.surname,
-        "job": u1.job,
-        "mobile": u1.mobile,
-        "email": u1.email,
-        "types": u1.types,
-        "fcmKey": await findFcmKey(),
-      },
-    ).then((value) {
-      return "success";
-    }).catchError((e) {
-      return "Failed";
-    });
+          {
+            "fName": a1.fName,
+            "lName": a1.lName,
+            "mobileNo": a1.mobileNo,
+            "emailId": a1.emailId,
+            "gender": a1.gender,
+            "userAdmin": a1.adminUser,
+            "dob": a1.dob,
+            "fcmToken": await findFCMToken(),
+          },
+        )
+        .then((value) => "success")
+        .catchError((e) => "failed");
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> readProfileData() {
+  Stream<DocumentSnapshot<Map<String, dynamic>>> readUserDetail() {
     return firebaseFirestore
-        .collection("cart")
+        .collection("data")
         .doc(FindUid())
-        .collection("detail")
+        .collection("profile")
+        .doc("TrikAexEw6aTxgTYIaT8")
         .snapshots();
-  }
-
-  Future<String> findFcmKey() async {
-    var fcmToken = await firebaseMessaging.getToken();
-    print(fcmToken);
-    return fcmToken!;
-  }
-
-  Future<String> updateProfile({
-    required UpdateModel u1,
-  }) async {
-    return await firebaseFirestore
-        .collection("cart")
-        .doc(FindUid())
-        .collection("detail")
-        .doc(u1.key)
-        .set(
-      {
-        "name": u1.name,
-        "surname": u1.surname,
-        "job": u1.job,
-        "mobile": u1.mobile,
-        "email": u1.email,
-        "types": u1.types,
-        "fcmKey": await findFcmKey(),
-      },
-    ).then((value) {
-      return "success";
-    }).catchError((e) {
-      return "Failed";
-    });
   }
 }

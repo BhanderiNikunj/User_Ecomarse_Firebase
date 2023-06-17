@@ -309,7 +309,49 @@ class _AddUserDetailScreenState extends State<AddUserDetailScreen> {
                     ),
                   ),
                   SizedBox(height: 10.sp),
-
+                  Obx(
+                    () => DropdownButton(
+                      value: addUserDetailControllor.userAdmin.value,
+                      isExpanded: true,
+                      items: [
+                        DropdownMenuItem(
+                          value: 0,
+                          child: Text(
+                            "Admin",
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: 1,
+                          child: Text(
+                            "User",
+                          ),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        addUserDetailControllor.userAdmin.value = value!;
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20.sp),
+                  Container(
+                    height: 30.sp,
+                    width: 60.sp,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 0.5.sp,
+                        color: Colors.pink.shade900,
+                      ),
+                      color: Colors.pink.shade400,
+                      borderRadius: BorderRadius.circular(10.sp),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Next",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

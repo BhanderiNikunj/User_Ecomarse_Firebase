@@ -10,5 +10,6 @@ class AddUserDetailControllor extends GetxController {
   TextEditingController txtEmailId = TextEditingController();
   TextEditingController txtDob = TextEditingController(text: "${DateTime.now().day} / ${DateTime.now().month} / ${DateTime.now().year}");
   RxString gender = "male".obs;
+  RxInt userAdmin = 0.obs;
 
 }

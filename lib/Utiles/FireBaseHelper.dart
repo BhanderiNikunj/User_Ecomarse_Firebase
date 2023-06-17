@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomarse_firebase/Screen/Home/Model/HomeModel.dart';
+import 'package:ecomarse_firebase/Screen/UpdateProfile/Modle/UpdateModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseHelper {
   static FirebaseHelper firebaseHelper = FirebaseHelper._();
@@ -9,6 +11,7 @@ class FirebaseHelper {
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
   // login
 
@@ -67,7 +70,7 @@ class FirebaseHelper {
 
   // database
 
-  Future<void> insertProduct({
+  Future<String> insertProduct({
     required name,
     required price,
     required desc,
@@ -76,7 +79,7 @@ class FirebaseHelper {
     required brand,
     required image,
   }) async {
-    await firebaseFirestore.collection("product").add(
+    return await firebaseFirestore.collection("product").add(
       {
         "name": name,
         "price": price,
@@ -86,7 +89,31 @@ class FirebaseHelper {
         "brand": brand,
         "image": image,
       },
-    );
+    ).then((value) {
+      return "success";
+    }).catchError((e) {
+      return "$e";
+    });
+  }
+
+  Future<String> updateProduct({
+    required HomeModel h1,
+  }) async {
+    return await firebaseFirestore.collection("product").doc(h1.key).set(
+      {
+        "name": h1.name,
+        "price": h1.price,
+        "desc": h1.desc,
+        "rate": h1.rate,
+        "stoke": h1.stoke,
+        "brand": h1.brand,
+        "image": h1.image,
+      },
+    ).then((value) {
+      return "success";
+    }).catchError((e) {
+      return "$e";
+    });
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> readProduct() {
@@ -130,13 +157,67 @@ class FirebaseHelper {
 
   // profile
 
-  Future<void> insertUserDetail() async {
-    await firebaseFirestore
+  Future<String> insertProfileData({
+    required UpdateModel u1,
+  }) async {
+    print(findFcmKey());
+    return await firebaseFirestore
         .collection("cart")
         .doc(FindUid())
         .collection("detail")
         .add(
-      {},
-    );
+      {
+        "name": u1.name,
+        "surname": u1.surname,
+        "job": u1.job,
+        "mobile": u1.mobile,
+        "email": u1.email,
+        "types": u1.types,
+        "fcmKey": await findFcmKey(),
+      },
+    ).then((value) {
+      return "success";
+    }).catchError((e) {
+      return "Failed";
+    });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> readProfileData() {
+    return firebaseFirestore
+        .collection("cart")
+        .doc(FindUid())
+        .collection("detail")
+        .snapshots();
+  }
+
+  Future<String> findFcmKey() async {
+    var fcmToken = await firebaseMessaging.getToken();
+    print(fcmToken);
+    return fcmToken!;
+  }
+
+  Future<String> updateProfile({
+    required UpdateModel u1,
+  }) async {
+    return await firebaseFirestore
+        .collection("cart")
+        .doc(FindUid())
+        .collection("detail")
+        .doc(u1.key)
+        .set(
+      {
+        "name": u1.name,
+        "surname": u1.surname,
+        "job": u1.job,
+        "mobile": u1.mobile,
+        "email": u1.email,
+        "types": u1.types,
+        "fcmKey": await findFcmKey(),
+      },
+    ).then((value) {
+      return "success";
+    }).catchError((e) {
+      return "Failed";
+    });
   }
 }

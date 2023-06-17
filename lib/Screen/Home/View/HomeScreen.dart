@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomarse_firebase/Screen/Home/Controllor/HomeControllor.dart';
 import 'package:ecomarse_firebase/Screen/Home/Model/HomeModel.dart';
@@ -137,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                mainAxisExtent: 175.sp,
+                                mainAxisExtent: 200.sp,
                               ),
                               itemCount: homeControllor.DataList.length,
                               itemBuilder: (context, index) {
@@ -150,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           "You Have Already Click One Time",
                                           "message");
                                     } else {
-
                                       print(index);
                                       HomeModel homeModel = HomeModel(
                                         key: homeControllor.DataList[index].key,
@@ -200,11 +201,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Text(
                                             "⭐️ ${homeControllor.DataList[index].rate}",
                                           ),
+                                          SizedBox(height: 10.sp),
                                           Container(
                                             height: 60.sp,
-                                            child: Image.network(
-                                                "${homeControllor.DataList[index].image}"),
+                                            width: double.infinity,
+                                            child: Image.memory(
+                                              Uint8List.fromList(
+                                                homeControllor.DataList[index]
+                                                    .image!.codeUnits,
+                                              ),
+                                            ),
                                           ),
+                                          SizedBox(height: 10.sp),
                                           Container(
                                             height: 20.sp,
                                             child: Text(

@@ -43,9 +43,10 @@ dependencies:
   firebase_auth: ^4.6.1
   cloud_firestore: ^4.8.0
   water_drop_nav_bar: ^2.2.0+5
-  firebase_messaging: ^14.6.2
+  firebase_messaging: ^14.6.3
   image_picker: ^0.8.7+5
   http: ^1.0.0
+  flutter_holo_date_picker: ^1.1.0
 
 dev_dependencies:
   flutter_test:

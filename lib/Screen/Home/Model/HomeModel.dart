@@ -1,6 +1,6 @@
 class HomeModel {
   String? brand, desc, image, name, key;
-  int? price, stoke;
+  int? price, stoke,status;
   double? rate;
   bool? isButton;
 

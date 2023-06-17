@@ -1,3 +1,4 @@
+import 'package:ecomarse_firebase/Screen/AddUserDetail/View/AddUserDetailScreen.dart';
 import 'package:ecomarse_firebase/Screen/Bottom/View/BottomScreen.dart';
 import 'package:ecomarse_firebase/Screen/Cart/View/CartScreen.dart';
 import 'package:ecomarse_firebase/Screen/Home/View/HomeScreen.dart';
@@ -6,6 +7,7 @@ import 'package:ecomarse_firebase/Screen/ShowProduct/View/ShowProductScreen.dart
 import 'package:ecomarse_firebase/Screen/SignIn/View/SignInScreen.dart';
 import 'package:ecomarse_firebase/Screen/SignUp/View/SignUpScreen.dart';
 import 'package:ecomarse_firebase/Screen/Sples/View/SplesScreen.dart';
+import 'package:ecomarse_firebase/Screen/UpdateProfile/View/UpdateProfileScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,6 +52,14 @@ Future<void> main() async {
           GetPage(
             name: '/profile',
             page: () => ProfileScreen(),
+          ),
+          GetPage(
+            name: '/updateProfile',
+            page: () => UpdateProfileScreen(),
+          ),
+          GetPage(
+            name: '/addUserDetail',
+            page: () => AddUserDetailScreen(),
           ),
         ],
       ),

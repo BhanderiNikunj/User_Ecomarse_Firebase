@@ -56,7 +56,8 @@ class _CartScreenState extends State<CartScreen> {
 
                 print(cartContollor.total);
                 cartContollor.discountPrice = cartContollor.total * 0.2;
-                cartContollor.discount = cartContollor.total - cartContollor.discountPrice;
+                cartContollor.discount =
+                    cartContollor.total - cartContollor.discountPrice;
                 print(cartContollor.discountPrice);
                 print(cartContollor.discount);
               }
@@ -352,24 +353,6 @@ class _CartScreenState extends State<CartScreen> {
                                       ),
                                     ],
                                   ),
-                                  // Row(
-                                  //   mainAxisAlignment:
-                                  //       MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     Text(
-                                  //       "Discount",
-                                  //       style: TextStyle(
-                                  //         color: Colors.white,
-                                  //       ),
-                                  //     ),
-                                  //     Text(
-                                  //       "\$ ${cartContollor.discount}%",
-                                  //       style: TextStyle(
-                                  //         color: Colors.white,
-                                  //       ),
-                                  //     ),
-                                  //   ],
-                                  // ),
                                 ],
                               ),
                             ),

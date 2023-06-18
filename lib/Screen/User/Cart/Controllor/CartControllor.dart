@@ -6,9 +6,8 @@ import 'package:get/get.dart';
 class CartContollor extends GetxController {
   List<HomeModel> cartList = [];
 
-  int subTotal = 0;
-  int discount = 20;
-  int delivery = 100;
+  double discount = 0.0;
+  double discountPrice = 0;
   int total = 0;
 
   RxInt Quantity = 1.obs;

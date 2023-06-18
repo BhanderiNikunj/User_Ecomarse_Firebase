@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomarse_firebase/Screen/User/Cart/Controllor/CartControllor.dart';
 import 'package:ecomarse_firebase/Screen/User/Home/Model/HomeModel.dart';
@@ -46,6 +48,17 @@ class _CartScreenState extends State<CartScreen> {
                 );
 
                 cartContollor.cartList.add(homeModel);
+
+                cartContollor.total = 0;
+                for (int i = 0; i < cartContollor.cartList.length; i++) {
+                  cartContollor.total += cartContollor.cartList[i].price!;
+                }
+
+                print(cartContollor.total);
+                cartContollor.discountPrice = cartContollor.total * 0.2;
+                cartContollor.discount = cartContollor.total - cartContollor.discountPrice;
+                print(cartContollor.discountPrice);
+                print(cartContollor.discount);
               }
               return Padding(
                 padding: EdgeInsets.all(10.sp),
@@ -67,8 +80,6 @@ class _CartScreenState extends State<CartScreen> {
                       child: ListView.builder(
                         itemCount: cartContollor.cartList.length,
                         itemBuilder: (context, index) {
-                          // cartControllor.Total = int.parse("${cartControllor.CartDataList[index].price + cartControllor.CartDataList[index+1].price}");
-
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
@@ -97,8 +108,11 @@ class _CartScreenState extends State<CartScreen> {
                                       color: Colors.black12,
                                     ),
                                     alignment: Alignment.center,
-                                    child: Image.network(
-                                      "${cartContollor.cartList[index].image}",
+                                    child: Image.memory(
+                                      Uint8List.fromList(
+                                        cartContollor
+                                            .cartList[index].image!.codeUnits,
+                                      ),
                                       fit: BoxFit.cover,
                                       height: 70.sp,
                                       width: 70.sp,
@@ -285,30 +299,14 @@ class _CartScreenState extends State<CartScreen> {
                                       Text(
                                         "Sub Total",
                                         style: TextStyle(
+                                          fontSize: 15.sp,
                                           color: Colors.white,
                                         ),
                                       ),
                                       Text(
                                         "\$ ${cartContollor.total}",
                                         style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Delivery Charge",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Text(
-                                        "\$ ${cartContollor.delivery}",
-                                        style: TextStyle(
+                                          fontSize: 15.sp,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -321,17 +319,57 @@ class _CartScreenState extends State<CartScreen> {
                                       Text(
                                         "Discount",
                                         style: TextStyle(
+                                          fontSize: 15.sp,
                                           color: Colors.white,
                                         ),
                                       ),
                                       Text(
-                                        "\$ ${cartContollor.discount}%",
+                                        "20 %",
                                         style: TextStyle(
+                                          fontSize: 15.sp,
                                           color: Colors.white,
                                         ),
                                       ),
                                     ],
                                   ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Discount Price",
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        "\$ ${cartContollor.discount.toInt()}",
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: [
+                                  //     Text(
+                                  //       "Discount",
+                                  //       style: TextStyle(
+                                  //         color: Colors.white,
+                                  //       ),
+                                  //     ),
+                                  //     Text(
+                                  //       "\$ ${cartContollor.discount}%",
+                                  //       style: TextStyle(
+                                  //         color: Colors.white,
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                             ),

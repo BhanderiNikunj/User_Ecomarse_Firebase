@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:ecomarse_firebase/Screen/User/Home/Model/HomeModel.dart';
 import 'package:ecomarse_firebase/Screen/User/ShowProduct/Controllor/ShowProductControllor.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +34,12 @@ class _ShowProductScreenState extends State<ShowProductScreen> {
             Center(
               child: Column(
                 children: [
-                  Image.network(
+                  Image.memory(
                     height: 200.sp,
                     width: double.infinity,
-                    "${homeModel.image}",
+                    Uint8List.fromList(
+                      homeModel.image!.codeUnits,
+                    ),
                   ),
                 ],
               ),

@@ -171,6 +171,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 },
                                                 icon: Icon(
                                                   Icons.delete,
+                                                  color: Colors.pink,
                                                 ),
                                               ),
                                             ],

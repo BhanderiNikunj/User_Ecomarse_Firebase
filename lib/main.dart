@@ -23,43 +23,43 @@ Future<void> main() async {
         getPages: [
           GetPage(
             name: '/',
-            page: () => SplesScreen(),
+            page: () => const SplesScreen(),
           ),
           GetPage(
             name: '/signIn',
-            page: () => SignInScreen(),
+            page: () => const SignInScreen(),
           ),
           GetPage(
             name: '/signUp',
-            page: () => SignUpScreen(),
+            page: () => const SignUpScreen(),
           ),
           GetPage(
             name: '/bottom',
-            page: () => BottomScreen(),
+            page: () => const BottomScreen(),
           ),
           GetPage(
             name: '/home',
-            page: () => HomeScreen(),
+            page: () => const HomeScreen(),
           ),
           GetPage(
             name: '/show',
-            page: () => ShowProductScreen(),
+            page: () => const ShowProductScreen(),
           ),
           GetPage(
             name: '/cart',
-            page: () => CartScreen(),
+            page: () => const CartScreen(),
           ),
           GetPage(
             name: '/adminHome',
-            page: () => AdminHomeScreen(),
+            page: () => const AdminHomeScreen(),
           ),
           GetPage(
             name: '/addData',
-            page: () => AddDataScreen(),
+            page: () => const AddDataScreen(),
           ),
           GetPage(
             name: '/addUserDetail',
-            page: () => AddUserDetailScreen(),
+            page: () => const AddUserDetailScreen(),
           ),
         ],
       ),

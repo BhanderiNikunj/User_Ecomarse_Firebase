@@ -16,54 +16,59 @@ class SplesScreen extends StatefulWidget {
 class _SplesScreenState extends State<SplesScreen> {
   @override
   Widget build(BuildContext context) {
+    Timer(
+      Duration(seconds: 3),
+      () {
+        Get.offAndToNamed('/signIn');
+      },
+    );
     return SafeArea(
       child: Scaffold(
-        body: StreamBuilder(
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text(
-                "${snapshot.error}",
-              );
-            } else if (snapshot.hasData) {
-              DocumentSnapshot? snapData = snapshot.data;
-
-              AddUserModel a1 = AddUserModel(
-                fName: snapData!['fName'],
-                lName: snapData['lName'],
-                emailId: snapData['emailId'],
-                fcmToken: snapData['fcmToken'],
-                dob: snapData['dob'],
-                adminUser: snapData['userAdmin'],
-                gender: snapData['gender'],
-                mobileNo: snapData['mobileNo'],
-              );
-
-              print(a1.fName);
-
-              Timer(
-                Duration(seconds: 3),
-                () {
-                  if (a1.adminUser == 1) {
-                    Get.offAndToNamed('/bottom');
-                  } else {
-                    Get.offAndToNamed('/adminHome');
-                  }
-                },
-              );
-              return Center(
-                child: FlutterLogo(
-                  size: 100.sp,
-                ),
-              );
-            }
-            return Center(
-              child: FlutterLogo(
-                size: 100.sp,
-              ),
-            );
-          },
-          stream: FirebaseHelper.firebaseHelper.readUserDetail(),
-        ),
+        // body: StreamBuilder(
+        //   builder: (context, snapshot) {
+        //     if (snapshot.hasError) {
+        //       return CircularProgressIndicator();
+        //     } else if (snapshot.hasData) {
+        //       DocumentSnapshot? snapData = snapshot.data;
+        //
+        //       AddUserModel a1 = AddUserModel(
+        //         fName: snapData!['fName'],
+        //         lName: snapData['lName'],
+        //         emailId: snapData['emailId'],
+        //         fcmToken: snapData['fcmToken'],
+        //         dob: snapData['dob'],
+        //         adminUser: snapData['userAdmin'],
+        //         gender: snapData['gender'],
+        //         mobileNo: snapData['mobileNo'],
+        //       );
+        //
+        //       print(a1.fName);
+        //
+        //       Timer(
+        //         Duration(seconds: 3),
+        //         () {
+        //           if (a1.adminUser == 1) {
+        //             Get.offAndToNamed('/bottom');
+        //           } else {
+        //             Get.offAndToNamed('/adminHome');
+        //           }
+        //         },
+        //       );
+        //       return Center(
+        //         child: FlutterLogo(
+        //           size: 100.sp,
+        //         ),
+        //       );
+        //     }
+        //     return Center(
+        //       child: FlutterLogo(
+        //         size: 100.sp,
+        //       ),
+        //     );
+        //   },
+        //   stream: FirebaseHelper.firebaseHelper.readUserDetail(),
+        // ),
+        body: CircularProgressIndicator(),
       ),
     );
   }

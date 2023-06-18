@@ -347,7 +347,8 @@ class _AddUserDetailScreenState extends State<AddUserDetailScreen> {
                           mobileNo: addUserDetailControllor.txtMobileNo.text,
                         );
 
-                        var msg = await addUserDetailControllor.insertUserDetail(
+                        var msg =
+                            await addUserDetailControllor.insertUserDetail(
                           a1: a1,
                         );
 
@@ -356,8 +357,10 @@ class _AddUserDetailScreenState extends State<AddUserDetailScreen> {
                           "",
                         );
 
-                        if (msg == "success") {
+                        if (addUserDetailControllor.userAdmin == 1) {
                           Get.toNamed('/bottom');
+                        } else {
+                          Get.toNamed('/adminHome');
                         }
                       },
                       child: Container(

@@ -7,6 +7,7 @@ import 'package:ecomarse_firebase/Screen/Login/Sples/View/SplesScreen.dart';
 import 'package:ecomarse_firebase/Screen/User/Bottom/View/BottomScreen.dart';
 import 'package:ecomarse_firebase/Screen/User/Cart/View/CartScreen.dart';
 import 'package:ecomarse_firebase/Screen/User/Home/View/HomeScreen.dart';
+import 'package:ecomarse_firebase/Screen/User/Profile/View/ProfileScreen.dart';
 import 'package:ecomarse_firebase/Screen/User/ShowProduct/View/ShowProductScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,10 @@ Future<void> main() async {
           GetPage(
             name: '/addUserDetail',
             page: () => const AddUserDetailScreen(),
+          ),
+          GetPage(
+            name: '/profile',
+            page: () => const ProfileScreen(),
           ),
         ],
       ),

@@ -17,4 +17,11 @@ class AdminHomeControllor extends GetxController {
       key: key,
     );
   }
+
+  void signOut() {
+    FirebaseHelper.firebaseHelper.signOut();
+    Get.offAndToNamed(
+      '/signIn',
+    );
+  }
 }

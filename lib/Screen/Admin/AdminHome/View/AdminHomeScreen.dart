@@ -45,9 +45,17 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       ),
                     ],
                   ),
-                  CircleAvatar(
-                    backgroundColor: Colors.pink,
+                  IconButton(
+                    onPressed: () {
+                      adminHomeControllor.signOut();
+                    },
+                    icon: Icon(
+                      Icons.logout_outlined,
+                    ),
                   ),
+                  // CircleAvatar(
+                  //   backgroundColor: Colors.pink,
+                  // ),
                 ],
               ),
               SizedBox(height: 20.sp),

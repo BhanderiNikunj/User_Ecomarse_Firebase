@@ -59,9 +59,9 @@ class FirebaseHelper {
     }
   }
 
-  String FindUid() {
+  String? FindUid() {
     User? user = firebaseAuth.currentUser;
-    var uid = user!.uid;
+    var uid = user?.uid;
     return uid;
   }
 
@@ -188,12 +188,11 @@ class FirebaseHelper {
         .catchError((e) => "failed");
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> readUserDetail(String key) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> readUserDetail(){
     return firebaseFirestore
         .collection("data")
         .doc(FindUid())
         .collection("profile")
-        .doc("$key")
         .snapshots();
   }
 }

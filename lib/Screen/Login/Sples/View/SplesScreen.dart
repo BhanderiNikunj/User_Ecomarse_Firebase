@@ -14,61 +14,88 @@ class SplesScreen extends StatefulWidget {
 }
 
 class _SplesScreenState extends State<SplesScreen> {
+  List<AddUserModel> detailList = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseHelper.firebaseHelper.FindUid();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: FirebaseHelper.firebaseHelper.FindUid() == null
+            ? notLogin()
+            : login(),
+      ),
+    );
+  }
+
+  Widget login() {
+    return StreamBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasData) {
+          QuerySnapshot? snapData = snapshot.data;
+
+          for (var x in snapData!.docs) {
+            AddUserModel a1 = AddUserModel(
+              fName: x['fName'],
+              lName: x['lName'],
+              emailId: x['emailId'],
+              fcmToken: x['fcmToken'],
+              dob: x['dob'],
+              adminUser: x['userAdmin'],
+              gender: x['gender'],
+              mobileNo: x['mobileNo'],
+              key: x.id,
+            );
+
+            detailList.add(a1);
+          }
+
+          for (int i = 0; i < detailList.length; i++) {
+            Timer(
+              Duration(seconds: 3),
+              () {
+                if (detailList[0].adminUser == 1) {
+                  Get.offAndToNamed('/bottom');
+                } else {
+                  Get.offAndToNamed('/adminHome');
+                }
+              },
+            );
+          }
+          return Center(
+            child: FlutterLogo(
+              size: 50.sp,
+            ),
+          );
+        }
+        return Center(
+          child: FlutterLogo(
+            size: 50.sp,
+          ),
+        );
+      },
+      stream: FirebaseHelper.firebaseHelper.readUserDetail(),
+    );
+  }
+
+  Widget notLogin() {
     Timer(
       Duration(seconds: 3),
       () {
         Get.offAndToNamed('/signIn');
       },
     );
-    return SafeArea(
-      child: Scaffold(
-        // body: StreamBuilder(
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasError) {
-        //       return CircularProgressIndicator();
-        //     } else if (snapshot.hasData) {
-        //       DocumentSnapshot? snapData = snapshot.data;
-        //
-        //       AddUserModel a1 = AddUserModel(
-        //         fName: snapData!['fName'],
-        //         lName: snapData['lName'],
-        //         emailId: snapData['emailId'],
-        //         fcmToken: snapData['fcmToken'],
-        //         dob: snapData['dob'],
-        //         adminUser: snapData['userAdmin'],
-        //         gender: snapData['gender'],
-        //         mobileNo: snapData['mobileNo'],
-        //       );
-        //
-        //       print(a1.fName);
-        //
-        //       Timer(
-        //         Duration(seconds: 3),
-        //         () {
-        //           if (a1.adminUser == 1) {
-        //             Get.offAndToNamed('/bottom');
-        //           } else {
-        //             Get.offAndToNamed('/adminHome');
-        //           }
-        //         },
-        //       );
-        //       return Center(
-        //         child: FlutterLogo(
-        //           size: 100.sp,
-        //         ),
-        //       );
-        //     }
-        //     return Center(
-        //       child: FlutterLogo(
-        //         size: 100.sp,
-        //       ),
-        //     );
-        //   },
-        //   stream: FirebaseHelper.firebaseHelper.readUserDetail(),
-        // ),
-        body: CircularProgressIndicator(),
+    return Center(
+      child: FlutterLogo(
+        size: 100.sp,
       ),
     );
   }

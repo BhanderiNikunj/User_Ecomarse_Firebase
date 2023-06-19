@@ -188,7 +188,7 @@ class FirebaseHelper {
         .catchError((e) => "failed");
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> readUserDetail(){
+  Stream<QuerySnapshot<Map<String, dynamic>>> readUserDetail() {
     return firebaseFirestore
         .collection("data")
         .doc(FindUid())

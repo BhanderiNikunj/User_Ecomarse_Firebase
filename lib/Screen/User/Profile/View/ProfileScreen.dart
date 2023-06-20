@@ -66,23 +66,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         IconButton(
                           onPressed: () {
-                            AddUserModel a1 = AddUserModel(
-                              adminUser:
-                                  profileControllor.detailList[0].adminUser,
-                              key: profileControllor.detailList[0].key,
-                              status: 1,
-                              dob: profileControllor.detailList[0].dob,
-                              emailId: profileControllor.detailList[0].emailId,
-                              fcmToken:
-                                  profileControllor.detailList[0].fcmToken,
-                              fName: profileControllor.detailList[0].fName,
-                              gender: profileControllor.detailList[0].gender,
-                              lName: profileControllor.detailList[0].lName,
-                              mobileNo:
-                                  profileControllor.detailList[0].mobileNo,
-                            );
+                            if (profileControllor.detailList.isEmpty) {
+                              AddUserModel a1 = AddUserModel(
+                                status: 1,
+                              );
 
-                            Get.toNamed('/addUserDetail', arguments: a1);
+                              Get.toNamed(
+                                '/addUserDetail',
+                                arguments: a1,
+                              );
+                              print("======================================");
+                            } else {
+                              AddUserModel a1 = AddUserModel(
+                                adminUser:
+                                    profileControllor.detailList[0].adminUser,
+                                key: profileControllor.detailList[0].key,
+                                status: 1,
+                                dob: profileControllor.detailList[0].dob,
+                                emailId:
+                                    profileControllor.detailList[0].emailId,
+                                fcmToken:
+                                    profileControllor.detailList[0].fcmToken,
+                                fName: profileControllor.detailList[0].fName,
+                                gender: profileControllor.detailList[0].gender,
+                                lName: profileControllor.detailList[0].lName,
+                                mobileNo:
+                                    profileControllor.detailList[0].mobileNo,
+                              );
+
+                              Get.toNamed('/addUserDetail', arguments: a1);
+                              print(
+                                  "--------------------------------------------");
+                            }
                           },
                           icon: Icon(
                             Icons.edit_outlined,

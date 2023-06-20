@@ -376,18 +376,18 @@ class _AddUserDetailScreenState extends State<AddUserDetailScreen> {
                             lName: addUserDetailControllor.txtLName.text,
                             mobileNo: addUserDetailControllor.txtMobileNo.text,
                           );
-                          String msg =
-                              await addUserDetailControllor.updateDetail(
-                            a1: a1,
-                          );
-
-                          Get.snackbar(
-                            "$msg",
-                            "",
-                          );
-                          if (msg == "success") {
-                            Get.back();
-                          }
+                          // String msg =
+                          //     await addUserDetailControllor.updateDetail(
+                          //   a1: a1,
+                          // );
+                          //
+                          // Get.snackbar(
+                          //   "$msg",
+                          //   "",
+                          // );
+                          // if (msg == "success") {
+                          //   Get.back();
+                          // }
                         } else {
                           AddUserModel a1 = AddUserModel(
                             adminUser: addUserDetailControllor.userAdmin.value,

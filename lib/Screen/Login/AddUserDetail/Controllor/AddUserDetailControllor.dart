@@ -22,11 +22,11 @@ class AddUserDetailControllor extends GetxController {
     );
   }
 
-  Future<String> updateDetail({
-    required AddUserModel a1,
-  }) async {
-    return await FirebaseHelper.firebaseHelper.updateUserDetail(
-      a1: a1,
-    );
-  }
+  // Future<String> updateDetail({
+  //   required AddUserModel a1,
+  // }) async {
+  //   return await FirebaseHelper.firebaseHelper.updateUserDetail(
+  //     a1: a1,
+  //   );
+  // }
 }

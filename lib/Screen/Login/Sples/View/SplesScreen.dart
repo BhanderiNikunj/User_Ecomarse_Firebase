@@ -63,8 +63,10 @@ class _SplesScreenState extends State<SplesScreen> {
               Duration(seconds: 3),
               () {
                 if (detailList[0].adminUser == 1) {
+                  print("--------------------------------------------------------");
                   Get.offAndToNamed('/bottom');
                 } else {
+                  print("====================================================");
                   Get.offAndToNamed('/adminHome');
                 }
               },

@@ -1,6 +1,6 @@
 class AddUserModel {
   String? fName, lName, mobileNo, emailId, dob, gender, fcmToken, key;
-  int? adminUser;
+  int? adminUser, status;
 
   AddUserModel({
     this.fName,
@@ -12,5 +12,6 @@ class AddUserModel {
     this.adminUser,
     this.key,
     this.fcmToken,
+    this.status,
   });
 }

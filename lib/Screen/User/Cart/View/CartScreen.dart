@@ -305,7 +305,7 @@ class _CartScreenState extends State<CartScreen> {
                                         ),
                                       ),
                                       Text(
-                                        "\$ ${cartContollor.total}",
+                                        cartContollor.cartList.isNotEmpty?"\$ ${cartContollor.total}":"\$ 0",
                                         style: TextStyle(
                                           fontSize: 15.sp,
                                           color: Colors.white,
@@ -345,7 +345,7 @@ class _CartScreenState extends State<CartScreen> {
                                         ),
                                       ),
                                       Text(
-                                        "\$ ${cartContollor.discount.toInt()}",
+                                        cartContollor.cartList.isNotEmpty?"\$ ${cartContollor.discount.toInt()}":"\$ 0",
                                         style: TextStyle(
                                           fontSize: 15.sp,
                                           color: Colors.white,

@@ -17,6 +17,33 @@ class _AddUserDetailScreenState extends State<AddUserDetailScreen> {
     AddUserDetailControllor(),
   );
 
+  AddUserModel data = Get.arguments;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // ignore: unnecessary_null_comparison
+    if (data != null) {
+      print("--------------");
+
+      addUserDetailControllor.txtFName =
+          TextEditingController(text: "${data.fName}");
+      addUserDetailControllor.txtLName =
+          TextEditingController(text: "${data.lName}");
+      addUserDetailControllor.txtEmailId =
+          TextEditingController(text: "${data.emailId}");
+      addUserDetailControllor.txtMobileNo =
+          TextEditingController(text: "${data.mobileNo}");
+      addUserDetailControllor.txtDob =
+          TextEditingController(text: "${data.dob}");
+      addUserDetailControllor.gender.value = "${data.gender}";
+      addUserDetailControllor.userAdmin.value = data.adminUser!;
+    } else {
+      print("================");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -337,30 +364,56 @@ class _AddUserDetailScreenState extends State<AddUserDetailScreen> {
                     SizedBox(height: 20.sp),
                     InkWell(
                       onTap: () async {
-                        AddUserModel a1 = AddUserModel(
-                          adminUser: addUserDetailControllor.userAdmin.value,
-                          dob: addUserDetailControllor.txtDob.text,
-                          emailId: addUserDetailControllor.txtEmailId.text,
-                          fName: addUserDetailControllor.txtFName.text,
-                          gender: addUserDetailControllor.gender.value,
-                          lName: addUserDetailControllor.txtLName.text,
-                          mobileNo: addUserDetailControllor.txtMobileNo.text,
-                        );
+                        //
 
-                        var msg =
-                            await addUserDetailControllor.insertUserDetail(
-                          a1: a1,
-                        );
+                        if (data.status == 1) {
+                          AddUserModel a1 = AddUserModel(
+                            adminUser: addUserDetailControllor.userAdmin.value,
+                            dob: addUserDetailControllor.txtDob.text,
+                            emailId: addUserDetailControllor.txtEmailId.text,
+                            fName: addUserDetailControllor.txtFName.text,
+                            gender: addUserDetailControllor.gender.value,
+                            lName: addUserDetailControllor.txtLName.text,
+                            mobileNo: addUserDetailControllor.txtMobileNo.text,
+                          );
+                          String msg =
+                              await addUserDetailControllor.updateDetail(
+                            a1: a1,
+                          );
 
-                        Get.snackbar(
-                          "$msg",
-                          "",
-                        );
-
-                        if (addUserDetailControllor.userAdmin == 1) {
-                          Get.toNamed('/bottom');
+                          Get.snackbar(
+                            "$msg",
+                            "",
+                          );
+                          if (msg == "success") {
+                            Get.back();
+                          }
                         } else {
-                          Get.toNamed('/adminHome');
+                          AddUserModel a1 = AddUserModel(
+                            adminUser: addUserDetailControllor.userAdmin.value,
+                            dob: addUserDetailControllor.txtDob.text,
+                            emailId: addUserDetailControllor.txtEmailId.text,
+                            fName: addUserDetailControllor.txtFName.text,
+                            gender: addUserDetailControllor.gender.value,
+                            lName: addUserDetailControllor.txtLName.text,
+                            mobileNo: addUserDetailControllor.txtMobileNo.text,
+                          );
+
+                          var msg =
+                              await addUserDetailControllor.insertUserDetail(
+                            a1: a1,
+                          );
+
+                          Get.snackbar(
+                            "$msg",
+                            "",
+                          );
+
+                          if (addUserDetailControllor.userAdmin == 1) {
+                            Get.toNamed('/bottom');
+                          } else {
+                            Get.toNamed('/adminHome');
+                          }
                         }
                       },
                       child: Container(
@@ -376,7 +429,7 @@ class _AddUserDetailScreenState extends State<AddUserDetailScreen> {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          "Next",
+                          data.status == 0 ? "Next" : "Update",
                           style: TextStyle(
                             color: Colors.white,
                           ),

@@ -188,31 +188,7 @@ class FirebaseHelper {
         .catchError((e) => "failed");
   }
 
-  Future<String> updateUserDetail({
-    required AddUserModel a1,
-  }) async {
-    return await firebaseFirestore
-        .collection("data")
-        .doc(FindUid())
-        .collection("profile")
-        .doc(a1.key)
-        .set(
-          {
-            "fName": a1.fName,
-            "lName": a1.lName,
-            "mobileNo": a1.mobileNo,
-            "emailId": a1.emailId,
-            "gender": a1.gender,
-            "userAdmin": a1.adminUser,
-            "dob": a1.dob,
-            "fcmToken": await findFCMToken(),
-          },
-        )
-        .then((value) => "success")
-        .catchError((e) => "failed");
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> readUserDetail() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> readUserDetail(){
     return firebaseFirestore
         .collection("data")
         .doc(FindUid())

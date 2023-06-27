@@ -228,11 +228,12 @@ class _AddDataScreenState extends State<AddDataScreen> {
                           a1: adminModel,
                         );
 
+                        Get.back();
+
                         Get.snackbar(
                           "$msg",
                           "",
                         );
-                        Get.back();
                       } else {
                         print("insert");
                         AdminHomeModel adminModel = AdminHomeModel(
@@ -248,14 +249,13 @@ class _AddDataScreenState extends State<AddDataScreen> {
                           a1: adminModel,
                         );
 
+                        if (msg == "success") {
+                          Get.back();
+                        }
                         Get.snackbar(
                           "$msg",
                           "",
                         );
-
-                        if (msg == "success") {
-                          Get.back();
-                        }
                       }
                     },
                     child: Container(

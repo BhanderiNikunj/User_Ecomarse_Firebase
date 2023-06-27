@@ -189,6 +189,7 @@ class FirebaseHelper {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> readUserDetail(){
+    print(FindUid());
     return firebaseFirestore
         .collection("data")
         .doc(FindUid())

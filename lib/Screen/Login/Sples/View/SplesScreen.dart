@@ -30,6 +30,8 @@ class _SplesScreenState extends State<SplesScreen> {
         body: FirebaseHelper.firebaseHelper.FindUid() == null
             ? notLogin()
             : login(),
+
+        // body: FlutterLogo(),
       ),
     );
   }
@@ -40,7 +42,11 @@ class _SplesScreenState extends State<SplesScreen> {
         if (snapshot.hasError) {
           return CircularProgressIndicator();
         } else if (snapshot.hasData) {
+          print("=============");
           QuerySnapshot? snapData = snapshot.data;
+          print(snapData);
+          print(snapshot);
+          detailList.clear();
 
           for (var x in snapData!.docs) {
             AddUserModel a1 = AddUserModel(
@@ -56,31 +62,33 @@ class _SplesScreenState extends State<SplesScreen> {
             );
 
             detailList.add(a1);
+
+            print(detailList.length);
           }
 
-          for (int i = 0; i < detailList.length; i++) {
-            Timer(
-              Duration(seconds: 3),
-              () {
-                if (detailList[0].adminUser == 1) {
-                  print("--------------------------------------------------------");
-                  Get.offAndToNamed('/bottom');
-                } else {
-                  print("====================================================");
-                  Get.offAndToNamed('/adminHome');
-                }
-              },
-            );
-          }
+          Timer(
+            Duration(seconds: 3),
+            () {
+              if (detailList[0].adminUser == 1) {
+                print(
+                    "--------------------------------------------------------");
+                Get.offAndToNamed('/bottom');
+              } else {
+                print("====================================================");
+                Get.offAndToNamed('/adminHome');
+              }
+            },
+          );
+
           return Center(
             child: FlutterLogo(
-              size: 50.sp,
+              size: 100.sp,
             ),
           );
         }
         return Center(
           child: FlutterLogo(
-            size: 50.sp,
+            size: 100.sp,
           ),
         );
       },
